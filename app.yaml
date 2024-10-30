@@ -1,0 +1,13 @@
+runtime: python39
+
+
+entrypoint: gunicorn -b :$PORT app2:app
+
+handlers:
+  # Serve static files from the "uploads" folder
+  - url: /uploads
+    static_dir: uploads
+
+  # Catch all routes and send to Flask app
+  - url: /.*
+    script: auto

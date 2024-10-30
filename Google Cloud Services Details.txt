@@ -1,0 +1,43 @@
+Google Cloud Services Information:
+
+This project leverages Google Cloud services to manage and host various aspects of the application, including storage, hosting, and external API integrations.
+
+1. Google Cloud Storage:
+- Bucket Name: cohesive-vine-437901-v1.appspot.com
+- Purpose:
+     This bucket is used to store uploaded images and their corresponding metadata.
+     Utility matrices for each user are also stored as JSON files within this bucket.
+- Files Stored:
+- Images: Uploaded via the API and stored in paths such as: gs://<bucket_name>/user_<user_id>/<image_name>.
+- Metadata JSON: Stored in paths like: gs://<bucket_name>/user_<user_id>_metadata/<image_name>.json.
+- Utility Matrix JSON: Stored in paths like: gs://<bucket_name>/user_<user_id>_utility/utility_matrix.json.
+- Service Account:
+     A service account with the necessary permissions is used to access the Cloud Storage bucket.
+
+
+2. Google App Engine:
+- Purpose: Hosts the Flask API (app2.py), which handles image uploads, metadata processing, and recommendation generation.
+- App Configuration:
+     The app.yaml file is used to configure the App Engine deployment.
+     The application runs in a flexible environment to allow dynamic scaling based on incoming traffic.
+
+
+3. Authentication:
+- Service Account:
+    A service account JSON file (service_account_key.json) is used to authenticate the app's interactions with Google Cloud services.
+- Permissions:
+    The service account has the following roles:
+         App Engine Admin
+         Storage Admin
+         Cloud API Admin
+
+4. APIs Accessed:
+- The application interacts with several external APIs to perform image classification and generate personalized recommendations:
+
+    Metadata Classification API: https://bewajafarwah--hf-stackup-image-classifier-fastapi-app.modal.run/metadata
+    Local Matrix API: https://abhi995-generatelocalmatrix.hf.space/gradio_api/call/predict
+    Recommendation API: https://abhi995-getrecommendation.hf.space/gradio_api/call/predict
+
+
+5. Dependencies:
+- The requirements.txt file lists all the Python dependencies required for this project. Ensure these dependencies are installed when deploying the application to App Engine.
